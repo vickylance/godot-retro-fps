@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/textures/circle32.png" type="Texture" id=1]
+
+[sub_resource type="SphereShape" id=1]
+radius = 2.0
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.105991, 0.384793, 0.675115, 0.806452, 0.928571, 0.997696 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 0, 1, 1, 0.695168, 0, 1, 1, 0.437356, 0, 1, 0.409443, 0.409443, 0.409443, 1, 0, 0, 0, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 0.238331 ), 0.0, 0.0, 0, 0, Vector2( 0.52459, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.0935942 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 1.0
+scale = 0.5
+scale_random = 0.8
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
+
+[sub_resource type="SpatialMaterial" id=7]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="QuadMesh" id=8]
+material = SubResource( 7 )
+
+[node name="Explosion" type="Area"]
+collision_layer = 0
+collision_mask = 18
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="Particles" type="Particles" parent="."]
+amount = 64
+speed_scale = 10.0
+explosiveness = 0.98
+randomness = 1.0
+process_material = SubResource( 6 )
+draw_pass_1 = SubResource( 8 )

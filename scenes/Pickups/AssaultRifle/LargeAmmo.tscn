@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/models/ammo/machinegunammo.glb" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Pickups/AmmoPickup.gd" type="Script" id=2]
+
+[sub_resource type="PhysicsMaterial" id=1]
+rough = true
+bounce = 0.5
+
+[sub_resource type="SphereShape" id=2]
+
+[sub_resource type="Animation" id=3]
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Graphics:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Graphics:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.1, 0 ), Vector3( 0, 0.1, 0 ), Vector3( 0, -0.1, 0 ) ]
+}
+
+[node name="Pickup" type="RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+collision_layer = 0
+physics_material_override = SubResource( 1 )
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource( 2 )
+pickup_type = 1
+item_name = "Assault Rifle Ammo"
+gun_type = 2
+ammo_amount = 60
+
+[node name="Shape" type="CollisionShape" parent="."]
+shape = SubResource( 2 )
+
+[node name="Graphics" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0 )
+
+[node name="machinegunammo" parent="Graphics" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.187817, 0, 0 )
+
+[node name="machinegunammo2" parent="Graphics" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.194648, 0, 0 )
+
+[node name="PickupArea" type="Area" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="Shape" type="CollisionShape" parent="PickupArea"]
+shape = SubResource( 2 )
+
+[node name="PickupLightUp" type="OmniLight" parent="."]
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "spin"
+anims/spin = SubResource( 3 )

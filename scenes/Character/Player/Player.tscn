@@ -1,0 +1,422 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://scenes/Character/Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Character/CharacterMover.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Character/HealthManager.gd" type="Script" id=3]
+[ext_resource path="res://scenes/Character/Player/WeaponManager.gd" type="Script" id=4]
+[ext_resource path="res://assets/models/weapons/machinegun.glb" type="PackedScene" id=5]
+[ext_resource path="res://assets/models/weapons/shotgun.glb" type="PackedScene" id=6]
+[ext_resource path="res://assets/models/weapons/rocketlauncher.glb" type="PackedScene" id=7]
+[ext_resource path="res://assets/models/weapons/pistol.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Weapons/Weapon.gd" type="Script" id=9]
+[ext_resource path="res://scenes/Weapons/HitScanBulletEmitter.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/Effects/MuzzleFlash.gd" type="Script" id=11]
+[ext_resource path="res://assets/models/effects/MuzzleFlash1.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/Character/Player/PickupManager.gd" type="Script" id=13]
+[ext_resource path="res://scenes/Weapons/BulletEmitterManager.gd" type="Script" id=15]
+[ext_resource path="res://assets/models/effects/MuzzleFlash3.tscn" type="PackedScene" id=16]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.5
+
+[sub_resource type="Animation" id=2]
+resource_name = "attack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Graphic:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0.0976615 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Graphic:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 13.318, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Graphic:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.02, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Graphic:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "attack"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Graphic:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0.0259321 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Graphic:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 2.21891, 0, 0 ), Vector3( 3.77691, 0, 0 ), Vector3( 2.21891, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Graphic:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0.013464 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Graphic:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 3.535, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "attack"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Graphic:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0.0673079 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0.00745156 ), Vector3( 0, -0.0610192, 0.00558868 ), Vector3( 0, 0, 0.00745156 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Graphic:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4, 0.5, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 11.03, 0, 0 ), Vector3( 79.397, 0, 0 ), Vector3( 79.397, 0, 0 ), Vector3( 79.397, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Graphic:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Graphic:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 3.616, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Graphic:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0.0595021 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Graphic:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 16.253, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Graphic:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.0188286, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Graphic:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 3.85, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="CapsuleShape" id=10]
+radius = 0.67
+
+[node name="Player" type="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+collision_layer = 6
+collision_mask = 3
+script = ExtResource( 1 )
+
+[node name="Shape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0 )
+current = true
+
+[node name="WeaponManager" type="Spatial" parent="Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0303304, -0.402451 )
+script = ExtResource( 4 )
+
+[node name="Weapons" type="Spatial" parent="Camera/WeaponManager"]
+
+[node name="Pistol" type="Spatial" parent="Camera/WeaponManager/Weapons"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.150568, -0.134064, 0.140058 )
+script = ExtResource( 9 )
+ammo = 0
+weapon_range = 40
+infinite_ammo = true
+
+[node name="Graphic" type="Spatial" parent="Camera/WeaponManager/Weapons/Pistol"]
+transform = Transform( 0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="pistol" parent="Camera/WeaponManager/Weapons/Pistol/Graphic" instance=ExtResource( 8 )]
+transform = Transform( -5.27241e-09, 0, 0.120619, 0, 0.120619, 0, -0.120619, 0, -5.27241e-09, 0, 0, -0.0603716 )
+
+[node name="MuzzleFlash" type="Spatial" parent="Camera/WeaponManager/Weapons/Pistol/Graphic"]
+transform = Transform( 0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 1, 0, 0.0454719, -0.187118 )
+visible = false
+script = ExtResource( 11 )
+flash_time = 0.05
+
+[node name="MuzzleFlash3" parent="Camera/WeaponManager/Weapons/Pistol/Graphic/MuzzleFlash" instance=ExtResource( 16 )]
+transform = Transform( -0.4, 0, -6.03983e-08, 0, 0.4, 0, 6.03983e-08, 0, -0.4, 0, 0, 0 )
+
+[node name="MuzzleLight" type="OmniLight" parent="Camera/WeaponManager/Weapons/Pistol/Graphic/MuzzleFlash"]
+transform = Transform( 1, 0, 0, 0, 0.999251, -0.0387178, 0, 0.0387178, 0.99925, 0.00221442, 0.00189233, -0.0939869 )
+light_color = Color( 1, 1, 0, 1 )
+light_energy = 2.0
+shadow_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera/WeaponManager/Weapons/Pistol"]
+autoplay = "idle"
+anims/attack = SubResource( 2 )
+anims/idle = SubResource( 3 )
+
+[node name="BulletEmitters" type="Spatial" parent="Camera/WeaponManager/Weapons/Pistol"]
+
+[node name="HitScanBulletEmitter" parent="Camera/WeaponManager/Weapons/Pistol/BulletEmitters" instance=ExtResource( 10 )]
+
+[node name="MachineGun" type="Spatial" parent="Camera/WeaponManager/Weapons"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.132917, -0.106858, 0.133943 )
+visible = false
+script = ExtResource( 9 )
+automatic = true
+weapon_range = 60
+
+[node name="Graphic" type="Spatial" parent="Camera/WeaponManager/Weapons/MachineGun"]
+transform = Transform( 1, 0, 0, 0, 0.99925, -0.0387176, 0, 0.0387176, 0.99925, 0, 0, 0 )
+
+[node name="machinegun" parent="Camera/WeaponManager/Weapons/MachineGun/Graphic" instance=ExtResource( 5 )]
+transform = Transform( 0.135, 0, 0, 0, 0.135, 0, 0, 0, 0.135, 0, 0, 0 )
+
+[node name="MuzzleFlash" type="Spatial" parent="Camera/WeaponManager/Weapons/MachineGun/Graphic"]
+transform = Transform( 1, 0, 0, 0, 1, -1.49012e-08, 0, 1.49012e-08, 1, 0, 0.0437157, -0.230357 )
+visible = false
+script = ExtResource( 11 )
+
+[node name="MuzzleFlash1" parent="Camera/WeaponManager/Weapons/MachineGun/Graphic/MuzzleFlash" instance=ExtResource( 12 )]
+transform = Transform( -0.1, 0, -1.50996e-08, 0, 0.1, 0, 1.50996e-08, 0, -0.1, 0, 0, 0 )
+
+[node name="MuzzleLight" type="OmniLight" parent="Camera/WeaponManager/Weapons/MachineGun/Graphic/MuzzleFlash"]
+transform = Transform( 1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, -0.000991702, -0.0255943 )
+light_color = Color( 1, 1, 0, 1 )
+shadow_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera/WeaponManager/Weapons/MachineGun"]
+autoplay = "idle"
+anims/attack = SubResource( 4 )
+anims/idle = SubResource( 5 )
+
+[node name="BulletEmitters" type="Spatial" parent="Camera/WeaponManager/Weapons/MachineGun"]
+
+[node name="HitScanBulletEmitter" parent="Camera/WeaponManager/Weapons/MachineGun/BulletEmitters" instance=ExtResource( 10 )]
+
+[node name="ShotGun" type="Spatial" parent="Camera/WeaponManager/Weapons"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0836056, -0.0354054, 0.268235 )
+visible = false
+script = ExtResource( 9 )
+damage = 20
+ammo = 60
+weapon_range = 20
+attack_rate = 1.0
+
+[node name="Graphic" type="Spatial" parent="Camera/WeaponManager/Weapons/ShotGun"]
+
+[node name="shotgun" parent="Camera/WeaponManager/Weapons/ShotGun/Graphic" instance=ExtResource( 6 )]
+transform = Transform( 0.135, 0, 0, 0, 0.135, 0, 0, 0, 0.135, 0, 0, 0 )
+
+[node name="MuzzleFlash" type="Spatial" parent="Camera/WeaponManager/Weapons/ShotGun/Graphic"]
+transform = Transform( 0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 1, -0.000172585, 0.0206366, -0.270688 )
+visible = false
+script = ExtResource( 11 )
+
+[node name="MuzzleFlash3" parent="Camera/WeaponManager/Weapons/ShotGun/Graphic/MuzzleFlash" instance=ExtResource( 16 )]
+transform = Transform( -0.4, 0, -6.03983e-08, 0, 0.4, 0, 6.03983e-08, 0, -0.4, 0, 0, 0 )
+
+[node name="MuzzleLight" type="OmniLight" parent="Camera/WeaponManager/Weapons/ShotGun/Graphic/MuzzleFlash"]
+transform = Transform( 1, 0, 0, 0, 0.999251, -0.0387178, 0, 0.0387177, 0.99925, -0.000720859, 0.00189233, -0.0253129 )
+light_color = Color( 1, 1, 0, 1 )
+shadow_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera/WeaponManager/Weapons/ShotGun"]
+autoplay = "idle"
+anims/attack = SubResource( 6 )
+anims/idle = SubResource( 7 )
+
+[node name="BulletEmitters" type="Spatial" parent="Camera/WeaponManager/Weapons/ShotGun"]
+script = ExtResource( 15 )
+
+[node name="HitScanBulletEmitter" parent="Camera/WeaponManager/Weapons/ShotGun/BulletEmitters" instance=ExtResource( 10 )]
+
+[node name="HitScanBulletEmitter2" parent="Camera/WeaponManager/Weapons/ShotGun/BulletEmitters" instance=ExtResource( 10 )]
+
+[node name="HitScanBulletEmitter3" parent="Camera/WeaponManager/Weapons/ShotGun/BulletEmitters" instance=ExtResource( 10 )]
+
+[node name="HitScanBulletEmitter4" parent="Camera/WeaponManager/Weapons/ShotGun/BulletEmitters" instance=ExtResource( 10 )]
+
+[node name="HitScanBulletEmitter5" parent="Camera/WeaponManager/Weapons/ShotGun/BulletEmitters" instance=ExtResource( 10 )]
+
+[node name="RocketLauncher" type="Spatial" parent="Camera/WeaponManager/Weapons"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.149499, -0.00646484, 0.142482 )
+visible = false
+
+[node name="Graphic" type="Spatial" parent="Camera/WeaponManager/Weapons/RocketLauncher"]
+
+[node name="rocketlauncher" parent="Camera/WeaponManager/Weapons/RocketLauncher/Graphic" instance=ExtResource( 7 )]
+transform = Transform( 0.135, 0, 0, 0, 0.135, 0, 0, 0, 0.135, 0, 0, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera/WeaponManager/Weapons/RocketLauncher"]
+autoplay = "idle"
+anims/attack = SubResource( 8 )
+anims/idle = SubResource( 9 )
+
+[node name="FirePoint" type="Spatial" parent="Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.159799 )
+
+[node name="CharacterMover" type="Spatial" parent="."]
+script = ExtResource( 2 )
+
+[node name="HealthManager" type="Spatial" parent="."]
+script = ExtResource( 3 )
+
+[node name="PickupManager" type="Area" parent="."]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource( 13 )
+
+[node name="Shape" type="CollisionShape" parent="PickupManager"]
+transform = Transform( 1.43694, 0, 0, 0, -2.34108e-07, -1.43694, 0, 1.43694, -2.34108e-07, 0, 0, 0 )
+shape = SubResource( 10 )
+[connection signal="fired" from="Camera/WeaponManager/Weapons/Pistol" to="Camera/WeaponManager/Weapons/Pistol/Graphic/MuzzleFlash" method="flash"]
+[connection signal="fired" from="Camera/WeaponManager/Weapons/MachineGun" to="Camera/WeaponManager/Weapons/MachineGun/Graphic/MuzzleFlash" method="flash"]
+[connection signal="fired" from="Camera/WeaponManager/Weapons/ShotGun" to="Camera/WeaponManager/Weapons/ShotGun/Graphic/MuzzleFlash" method="flash"]
